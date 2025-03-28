@@ -1,6 +1,8 @@
 #ifndef __PATH__
 #define __PATH__
 
+#include <stdlib.h>
+#include "adress.h"
 #include "matrix.h"
 /**
  * @file path.h
@@ -9,18 +11,12 @@
  * déclare les fonctions associées à la manipulation de ces chemins
  */
 
-// Définition de la structure pour représenter une adresse dans un chemin (liste chaînée)
-typedef struct _adress_node{
-    int index;
-    struct _adress* next;
-}adress_node;
 
-typedef adress_node adress;
 
 // Définition de la structure pour représenter un chemin
 typedef struct _path
 {
-    adress* first; 
+    adress* first;
     double fitness;
     float fullTime;
 
