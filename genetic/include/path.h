@@ -17,6 +17,7 @@
 typedef struct _path
 {
     adress* first;
+    adress* last;
     double fitness;
     float fullTime;
 
