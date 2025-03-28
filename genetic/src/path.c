@@ -42,6 +42,7 @@ Path generatePath(Matrix matrix,int* avoidAdressIndexes,int startIndex,int endIn
     }
     adress* end = create_adress(endIndex);
     insert_adress(path.first,end);
+    path.fullTime = path.fullTime+matrix.matrix[path.last->pharmacyIndex][endIndex].time;
     path.last=end;
 
     return path;
