@@ -1,11 +1,13 @@
 
 #include "../include/path.h"
 
+#define LIMIT_TIME 180
+
 double evaluateFitness(Matrix matrix,adress* adrs); // Tiago
 
 Path generatePath(Matrix matrix,int* avoidAdressIndexes,int startIndex,int endIndex){
-
-} //Ethan
+    
+}; //Ethan
 
 Path* initPaths(Matrix matrix,int nbPaths); // Tiago
 
