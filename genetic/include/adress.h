@@ -65,11 +65,12 @@ void permute_adress(adress* adr1, adress* adr2);
  * @brief Insère un nouveau nœud d'adresse dans une liste chaînée.
  *
  * @param firstAdr Un pointeur vers le premier nœud (tête) de la liste chaînée.
+ * @param adr Un pointeur représentant l'adresse à ajouter à la liste chaînée.
  *
  * @note La position de l'insertion (début, fin, après un nœud spécifique) n'est pas précisée ici
  * et dépendra de l'implémentation de la fonction et du contexte d'appel. La fonction pourrait
  * insérer au début de la liste pointée par `firstAdr`, mais cela n'est pas garanti par la signature.
  */
-void insert_adress(adress* firstAdr);
+void insert_adress(adress* firstAdr,adress* adr);
 
 #endif
