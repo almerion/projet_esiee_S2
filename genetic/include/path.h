@@ -85,9 +85,9 @@ Path crossover(Path path1,Path path2);
  * aléatoires dans le chemin pour augmenter la diversité de la population et éviter de rester bloqué
  * dans des optima locaux.
  *
- * @param path Un chemin à muter.
+ * @param path Un pointeur vers un chemin à muter.
  */
-void mutate(Path path);
+void mutate(Path* path);
 
 #endif
 
