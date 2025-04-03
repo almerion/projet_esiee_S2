@@ -3,9 +3,9 @@
 
 #define LIMIT_TIME 180
 
-double evaluateFitness(Matrix matrix,adress* adrs); // Tiago
+double evaluateFitness(Matrix matrix,lst adrs); // Tiago
 
-Path generatePath(Matrix matrix,int* avoidAdressIndexes,int startIndex,int endIndex){
+Path generatePath(Matrix matrix,lst startAdr){
     
 }; //Ethan
 
