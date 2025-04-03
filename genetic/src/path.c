@@ -19,12 +19,16 @@ double evaluateFitness(Matrix matrix,lst adrs){ // Tiago
 }
 
 Path generatePath(Matrix matrix,lst startAdr){
+    Path path = {startAdr,0}; 
+    path.fitness = evaluateFitness(matrix,startAdr);
+
+    return path;
     
 }; //Ethan
 
 Path* initPaths(Matrix matrix,int nbPaths); // Tiago
 
-int checkPaths(Path* path,int nbPaths); // Ethan
+void sortPaths(Path* path,int nbPaths); // Ethan
 
 Path crossover(Path path1,Path path2); // Tiago
 
