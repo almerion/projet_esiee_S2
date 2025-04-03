@@ -15,7 +15,6 @@
 typedef struct _path
 {
     lst startAdr;      ///< Pointeur vers le premier nœud (tête) de la liste chaînée d'adresses du chemin.
-    adress* lastAdr;       ///< Pointeur vers le dernier nœud (queue) de la liste chaînée d'adresses du chemin.
     double fitness;     ///< Valeur numérique représentant la qualité (fitness) de ce chemin. Une valeur plus élevée indique généralement un meilleur chemin.
     float fullTime;     ///< Temps total ou coût associé à la traversée de ce chemin.
 
