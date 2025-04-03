@@ -49,14 +49,16 @@ Path generatePath(Matrix matrix, lst startAdr);
 Path* initPaths(Matrix matrix, int nbPaths);
 
 /**
- * @brief Vérifie si un tableau de chemins est valide selon certains critères.
- * Le paramètre `nbPaths` pourrait représenter le nombre de chemins dans le tableau à vérifier ou un autre critère de validation lié à la quantité de chemins.
- *
- * @param paths Un pointeur vers le premier élément d'un tableau de structures `Path` à vérifier.
- * @param nbPaths Un entier représentant un critère de validation appliqué à l'ensemble des chemins (la signification exacte dépend de l'implémentation).
- * @return 1 si tous les chemins dans le tableau sont valides selon les critères définis, 0 sinon (ou si au moins un chemin est invalide).
+ * @brief Trie un tableau de chemins selon un critère spécifique.
+ * @param paths Un pointeur vers le premier élément du tableau de structures `Path`
+ * à trier. La fonction modifiera l'ordre des éléments directement dans
+ * ce tableau.
+ * @param nbPaths Un entier représentant le nombre d'éléments valides dans le
+ * tableau `paths` qui doivent être considérés pour le tri. Il est
+ * crucial que ce paramètre reflète la taille effective de la portion
+ * du tableau contenant les chemins à trier.
  */
-int checkPaths(Path* paths, int nbPaths);
+void sortPaths(Path* paths, int nbPaths);
 
 /**
  * @brief Applique l'opération de croisement (crossover) entre deux chemins parents pour créer un nouveau chemin enfant.
