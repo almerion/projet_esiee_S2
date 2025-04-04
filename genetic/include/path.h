@@ -77,6 +77,6 @@ Path crossover(Path path1, Path path2);
  *
  * @param path Un pointeur vers le chemin à muter. La mutation pourrait impliquer l'échange de deux adresses, l'insertion ou la suppression d'une adresse, etc.
  */
-void mutate(Path* path);
+void mutate(Matrix matrix,Path* path,int nbPaths);
 
 #endif
