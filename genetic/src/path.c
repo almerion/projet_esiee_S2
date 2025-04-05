@@ -1,8 +1,9 @@
 
 #include "../include/path.h"
+#include <stdio.h> 
 
+#define MAX_ADRESSE 85
 #define LIMIT_TIME 180
-
 double evaluateFitness(Matrix matrix,lst adrs){ // Tiago
     Distime total = {0, 0};
     
@@ -28,8 +29,55 @@ Path generatePath(Matrix matrix,lst startAdr){
 
 Path* initPaths(Matrix matrix,int nbPaths); // Tiago
 
-void sortPaths(Path* path,int nbPaths); // Ethan
+int compare(const void* a, const void* b){
+    return ((*(Path*)a).fitness - (*(Path*)b).fitness);
+};
+void sortPaths(Path* path,int nbPaths){    
+    qsort(path,sizeof(Path),nbPaths,compare);
+}; // Ethan
 
 Path crossover(Path path1,Path path2); // Tiago
+Path mutatePath(Matrix matrix,Path path){
+    lst list = path.startAdr;
+    int mutable = 0;
+    while ( list != NULL)
+    {
+        if(mutable == 1 && list->next != NULL){
+            int tmp = list->pharmacyIndex;
+            list->pharmacyIndex = list->next->pharmacyIndex;
+            list->next->pharmacyIndex = tmp;
+            mutable = 0;
+        }
+        else {
+            mutable = rand()%1;
+            list = list->next;
+        }
 
-void mutate(Path* path); // Ethan
+    }
+
+    path.fitness = evaluateFitness(matrix,path.startAdr);
+    return path;
+    
+    
+    
+}
+void mutate(Matrix matrix,Path* path,int nbPaths){
+    int pathIndex;
+    for(pathIndex = 0;pathIndex<nbPaths;pathIndex++){
+        path[pathIndex] = mutatePath(matrix,path[pathIndex]);
+    }
+}; // Ethan
+
+void printGen(Path* path,int nbPaths){
+    int i;
+    for(i=0;i<nbPaths;i++){
+        Path currPath = path[i];
+        lst curr = currPath.startAdr;
+        printf("path %d : ",i);
+        while(curr->next != NULL){
+            printf("%d -> ",curr->pharmacyIndex);
+        }
+        printf("%d\n",curr->pharmacyIndex);
+        printf("fitness : %d\n\n",currPath.fitness);
+    }
+}
