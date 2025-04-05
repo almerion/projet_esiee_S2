@@ -49,11 +49,13 @@ Matrix* prepare_matrix(FILE *file, char *line_buffer) {
     
     int nb_lines = parse_line(distime_buffer, line_buffer);
     if(nb_lines <= 0) {
+        free(distime_buffer);
         return NULL;
     }
 
     distime_buffer = (Distime*) realloc(distime_buffer, sizeof(Distime) * nb_lines);
     if(distime_buffer == NULL) {
+        free(distime_buffer);
         fprintf(stderr, "realloc of distime buffer failed\n");
         return NULL;
     }
@@ -71,13 +73,19 @@ Matrix* parse_file(char* filePath) {
 
     char *buffer = (char*) malloc(sizeof(char) * LINE_BUFFER_SIZE);
     Matrix *matrix = prepare_matrix(file, buffer);
-    if(matrix == NULL) return NULL;
+    if(matrix == NULL) {
+        free(buffer);
+        fclose(file);
+        return NULL;
+    };
 
     int i = 1;
     while (!feof(file)) {
         if(!read_line(file, buffer, LINE_BUFFER_SIZE)) {
             free_matrix(matrix);
             fprintf(stderr, "Something went wrong while reading the line number %d\n", i+1);
+            fclose(file);
+            free(buffer);
             return NULL;
         }
         if(buffer[0] == '\0') continue;
@@ -85,10 +93,14 @@ Matrix* parse_file(char* filePath) {
         if(parse_line(matrix->matrix[i], buffer) != matrix->size) {
             free_matrix(matrix);
             fprintf(stderr, "Something went wrong while parsing the line number %d\n", i+1);
+            fclose(file);
+            free(buffer);
             return NULL;
         }
         i++;
     }
 
+    free(buffer);
+    fclose(file);
     return matrix;
 }
