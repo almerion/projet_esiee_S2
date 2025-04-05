@@ -3,6 +3,9 @@
 
 #include "matrix.h"
 
+#define LINE_BUFFER_SIZE 2048
+#define DISTIME_BUFFER_SIZE 100
+
 /**
  * @file parser.h
  * @brief Déclare les fonctions nécessaires pour parser (analyser) un fichier
@@ -22,6 +25,6 @@
  * la fonction pourrait retourner une matrice vide ou signaler l'erreur
  * d'une autre manière (par exemple, en retournant NULL).
  */
-Matrix parseFile(char* filePath);
+Matrix* parse_file(char* filePath);
 
 #endif

@@ -25,11 +25,15 @@ typedef struct matrix {
 /**
  * @brief Affiche le contenu de la matrice de distances et de temps.
  *
- * @param matrix La structure `Matrix` à afficher.
+ * @param m La structure `Matrix` à afficher.
  *
  * @note Cette fonction est probablement utilisée à des fins de débogage ou d'affichage des données de la matrice.
  * Le format d'affichage dépendra de l'implémentation de la fonction.
  */
-void displayMatrix(Matrix matrix);
+void display_matrix(Matrix* m);
+
+Matrix* create_matrix(int size, Distime* base);
+Distime* create_distime(int size);
+void free_matrix(Matrix* matrix);
 
 #endif
