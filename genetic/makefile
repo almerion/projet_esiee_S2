@@ -1,17 +1,27 @@
-CC=gcc
-CFLAG = -Wall -ansi -std=c99 -Werror -Wextra
-SRC_DIR = src
-OBJ_DIR = bin
-SRC = $(wildcard $(SRC_DIR)/*.c)
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+CC = gcc
+CFLAGS = -Wall -ansi -std=c99 -Werror -Wextra -g -I include
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
-	$(CC) -c $< -o $@ $(CFLAG)
+DEPS =  include/adress.h \
+        include/matrix.h \
+        include/parser.h \
+        include/path.h
 
-exe: $(OBJ)
-	$(CC) -o $@ $^
+SRC =   src/main.c \
+        src/genetic.c \
+        src/matrix.c \
+        src/parser.c \
+        src/path.c
 
-clean: 
-	rm -f exe
-	rm -f $(OBJ)
+OBJ = $(SRC:.c=.o)
+
+all: genetic
+
+genetic: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c $(DEPS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY: clean
+clean:
+	rm -f $(OBJ) genetic
