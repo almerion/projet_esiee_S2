@@ -11,12 +11,37 @@
  * déclare les fonctions associées à la manipulation de ces chemins.
  */
 
+#define POPULATION_SIZE 32
+#define PERCENT_KEPT 25    /* Est ce qu'on en garde trop ? */
+#define PERCENT_FATHER 50  /* Faut-il plus accompler uniquement les meilleurs ? */
+#define PERCENT_NEW 50     /* Un inidividu aléatoire ne peut plus rivaliser avec un déjà un peu optimiser */
+#define MUTATION_RATE 16
+#define LIMIT_TIME 180
+#define SERVICE_TIME 3
+#define MUTATION_PERCENTAGE 20
+
 // Définition de la structure pour représenter un chemin
-typedef struct _path
-{
+typedef struct _path {
     lst startAdr;      ///< Pointeur vers le premier nœud (tête) de la liste chaînée d'adresses du chemin.
-    double fitness;     ///< Valeur numérique représentant la qualité (fitness) de ce chemin. Une valeur plus élevée indique généralement un meilleur chemin.
 }Path;
+
+typedef Path Gene;
+
+typedef struct{
+    Gene *gene;  /* The full genome */
+    int nbGenes;
+    long int fitness;        /* the fitness in cache */
+}Individual;
+
+typedef struct{
+    Individual* ind;         /* Array of individuals */
+    int population_size;     /* Size of the population */
+}Population;
+
+void init_random_individual(Matrix m, Individual* ind);
+int init_random_population(Matrix m,Population* pop, int gene_size);
+int cmp_individual(const void * a, const void * b);
+void sort_population(Population* pop);
 
 /**
  * @brief Évalue la qualité (fitness) d'un chemin donné en fonction d'une matrice de coûts.
@@ -25,7 +50,7 @@ typedef struct _path
  * @param startAdr Le pointeur vers le premier nœud de la liste chaînée représentant le chemin.
  * @return La valeur de fitness du chemin. Cette valeur est calculée en fonction des coûts (distances, temps) présents dans la `matrix` pour le parcours défini par la liste d'adresses.
  */
-double evaluateFitness(Matrix matrix, lst startAdr);
+double evaluateFitness(Matrix matrix, Individual individual);
 
 /**
  * @brief Génère un nouveau chemin à partir d'une première adresse donnée.
@@ -68,7 +93,7 @@ void sortPaths(Path* paths, int nbPaths);
  * @param path2 La deuxième structure `Path` représentant le deuxième parent.
  * @return Une nouvelle structure `Path` représentant le chemin enfant résultant du croisement des deux parents.
  */
-Path crossover(Path path1, Path path2);
+void crossover(int* father, int* mother, int matrix_size, int* child);
 
 /**
  * @brief Applique l'opération de mutation à un chemin donné. La mutation introduit de petites modifications
@@ -77,6 +102,6 @@ Path crossover(Path path1, Path path2);
  *
  * @param path Un pointeur vers le chemin à muter. La mutation pourrait impliquer l'échange de deux adresses, l'insertion ou la suppression d'une adresse, etc.
  */
-void mutate(Matrix matrix,Path* path,int nbPaths);
+void mutate(int* individual, int matrix_size);
 
 #endif
