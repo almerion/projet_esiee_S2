@@ -3,7 +3,6 @@
 
 
 #include "matrix.h"
-#include "path.h"
 /**
  * @file adress.h
  * @brief Définit la structure de données pour représenter une adresse
@@ -33,8 +32,6 @@ adress_node* create_adress(int pharmacyIndex);
 adress_node* create_and_insert_after(adress_node* prev, int pharmacyIndex);
 adress_node* create_and_insert_before(adress_node* next, int pharmacyIndex);
 void free_adresses(adress_node* adress);
-int* individual_to_list(Individual* ind, int matrixSize);
-Individual* list_to_individual(int* list, Matrix *m, Individual* individual);
 
 /**
  * @brief Retire le dernier élément de la liste chaînée d'adresses et le retourne.
