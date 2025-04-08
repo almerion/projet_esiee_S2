@@ -1,6 +1,8 @@
-#include "matrix.h"
 #include "parser.h"
+#include "genetic.h"
 #include <stdio.h>
+
+#define POPULATION_SIZE 32
 
 int main(int argc, char* argv[]) {
     if(argc < 2) {
@@ -13,8 +15,22 @@ int main(int argc, char* argv[]) {
         return 2;
     }
 
-    display_matrix(m);
-    printf("\n%d\n",m->size);
+    Population* population = create_population();
+    int result = init_random_population(*m, population, POPULATION_SIZE);
+    if(!result) {
+        free_matrix(m);
+        return 1;
+    }
+    int i;
+    for(i = 0; i < 2; i++) {
+        result = evolve_population(*m, population);
+        if(!result) {
+            free_population(population);
+            free_matrix(m);
+            return 1;
+        }
+        printf("\n\n");
+    }
     free_matrix(m);
     return 0;
 }

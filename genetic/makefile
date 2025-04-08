@@ -2,17 +2,21 @@ CC = gcc
 CFLAGS = -Wall -ansi -std=c99 -Werror -Wextra -g -I include
 
 DEPS =  include/adress.h \
+        include/gene.h \
+        include/individual.h \
         include/matrix.h \
         include/parser.h \
-        include/path.h \
-        include/genetic.h
+        include/population.h \
+        includegenetic.h
 
 SRC =   src/main.c \
         src/genetic.c \
         src/matrix.c \
         src/parser.c \
-        src/path.c \
-        src/adress.c
+        src/individual.c \
+        src/adress.c \
+        src/gene.c \
+        src/population.c
 
 OBJ = $(SRC:.c=.o)
 
