@@ -1,6 +1,8 @@
 #include "parser.h"
 #include "genetic.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define POPULATION_SIZE 32
 
@@ -9,6 +11,7 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "You have to specify the path to a csv as argument\n");
         return 1;
     }
+    srand(time(NULL));
 
     Matrix* m = parse_file(argv[1]);
     if (m == NULL) {
@@ -22,7 +25,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     int i;
-    for(i = 0; i < 2; i++) {
+    for(i = 0; i < 50000000; i++) {
+        printf("\033[2J\033[H");
         result = evolve_population(*m, population);
         if(!result) {
             free_population(population);

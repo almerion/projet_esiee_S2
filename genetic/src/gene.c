@@ -23,8 +23,8 @@ Gene *create_genes(int nb_genes) {
 }
 
 int get_random_nb_genes(Matrix m) {
-    int min_genes = m.size * (MIN_PHARMACY_CAR_RATIO / 100);
-    int max_genes = m.size * (MAX_PHARMACY_CAR_RATIO / 100);
+    int min_genes = (m.size * MIN_PHARMACY_CAR_RATIO) / 100;
+    int max_genes = (m.size * MAX_PHARMACY_CAR_RATIO) / 100;
     int nb_genes = rand() % (max_genes - min_genes + 1) + min_genes;
     if(nb_genes < MIN_CAR) {
         nb_genes = MIN_CAR;
@@ -44,4 +44,14 @@ void free_genes(Gene* genes, int nb_genes) {
         }
     }
     free(genes);
+}
+
+void print_genes(Gene *genes, int nb_genes) {
+    int i;
+    for(i = 0; i < nb_genes; i++) {
+        printf("G%d (", i);
+        print_adresses(genes[i].start_adress);
+        printf(")");
+        printf("\n");
+    }
 }

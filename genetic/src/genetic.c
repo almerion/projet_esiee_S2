@@ -75,7 +75,7 @@ void sort_population(Population* population){
     qsort(population->individuals, population->population_size, sizeof(Individual), cmp_individual);
 
     for (i=0 ; i<population->population_size ; i++){
-        printf("%ld\n", population->individuals[i].fitness);
+        printf("%f\n", population->individuals[i].fitness);
     }
 }
 

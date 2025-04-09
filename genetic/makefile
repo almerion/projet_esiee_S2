@@ -7,7 +7,7 @@ DEPS =  include/adress.h \
         include/matrix.h \
         include/parser.h \
         include/population.h \
-        includegenetic.h
+        include/genetic.h
 
 SRC =   src/main.c \
         src/genetic.c \

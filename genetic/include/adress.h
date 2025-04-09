@@ -32,6 +32,7 @@ adress_node* create_adress(int pharmacyIndex);
 adress_node* create_and_insert_after(adress_node* prev, int pharmacyIndex);
 adress_node* create_and_insert_before(adress_node* next, int pharmacyIndex);
 void free_adresses(adress_node* adress);
+void print_adresses(adress_node *start_adress);
 
 /**
  * @brief Retire le dernier élément de la liste chaînée d'adresses et le retourne.
