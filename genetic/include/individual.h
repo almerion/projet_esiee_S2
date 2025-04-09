@@ -10,7 +10,7 @@
 typedef struct{
     Gene *gene;  /* The full genome */
     int nbGenes;
-    long int fitness;        /* the fitness in cache */
+    double fitness;        /* the fitness in cache */
 }Individual;
 
 Individual* create_individuals(int nb_individuals);
@@ -19,6 +19,7 @@ int cmp_individual(const void * a, const void * b);
 double evaluateFitness(Matrix matrix, Individual individual);
 void list_to_individual(int* list, Matrix m, Individual* individual);
 int* individual_to_list(Individual* ind, int size);
-void free_individuals(Individual*, int nb_individuals);
+void free_individuals(Individual* individuals, int nb_individuals);
+void print_individuals(Individual* individuals, int nb_individuals);
 
 #endif

@@ -55,7 +55,7 @@ int init_random_individual(Matrix m, Individual* individual, int nb_genes) {
             free_genes(individual->gene, nb_genes);
             return 0;
         }
-        selected_car->start_adress = create_and_insert_before(selected_car->start_adress, i);
+        selected_car->start_adress = node;
     }
     return 1;
 }
@@ -127,14 +127,14 @@ int* individual_to_list(Individual* ind, int size) {
 }
 
 void list_to_individual(int* list, Matrix m, Individual* individual) {
-    int i;
-    for(i = 0; i < individual->nbGenes; i++) {
-        free_adresses(individual->gene[i].start_adress);
-        individual->gene[i].start_adress = NULL;
-    }
+    /*buffer de genes car maybe plus valide, moins de cases que nécessaire */
+    free_genes(individual->gene, individual->nbGenes);
+    individual->gene = NULL;
     
     int real_matrix_size = m.size - 1;
-    
+    /*un peu abusé surement ..*/
+    Gene* genes = create_genes(real_matrix_size);
+    int i = 0;
     int gene_index = 0;
     /* could calculate the fitness here at the same time ? */
     while (i < real_matrix_size) {
@@ -151,15 +151,15 @@ void list_to_individual(int* list, Matrix m, Individual* individual) {
             new_time += dtBack.time;
 
             if(new_time <= LIMIT_TIME){
-                if(individual->gene[gene_index].start_adress == NULL) {
-                    individual->gene[gene_index].start_adress = create_adress(to);
+                if(genes[gene_index].start_adress == NULL) {
+                    genes[gene_index].start_adress = create_adress(to);
                 } else {
                     /* replace by a function or struct that points to first and last*/
-                    adress_node* last = individual->gene[gene_index].start_adress;
+                    adress_node* last = genes[gene_index].start_adress;
                     while(last->next != NULL) { 
                         last = last->next;
                     }
-                    create_and_insert_after(last, to);
+                    create_and_insert_after(last, to);    
                 }
                 current_time = new_time;
                 from = to;
@@ -169,7 +169,18 @@ void list_to_individual(int* list, Matrix m, Individual* individual) {
             }
         }
 
-        if (i < real_matrix_size) gene_index++;
+        gene_index++;
     }
+    genes = realloc(genes, sizeof(Gene) * gene_index);
+    individual->gene = genes;
     individual->nbGenes = gene_index;
+}
+
+void print_individuals(Individual* individuals, int nb_individuals) {
+    int i;
+    for(i = 0; i < nb_individuals; i ++) {
+        printf("Ind%d [\n", i);
+        print_genes(individuals[i].gene, individuals[i].nbGenes);
+        printf("]\n");
+    }
 }

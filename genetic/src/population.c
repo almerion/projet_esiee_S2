@@ -45,3 +45,10 @@ void free_population(Population* population) {
     free_individuals(population->individuals, population->population_size);
     free(population);
 }
+
+void print_fitnesses(Population* population) {
+    int i;
+    for(i = 0; i < population->population_size; i++) {
+        printf("%f\n", population->individuals[i].fitness);
+    }
+}

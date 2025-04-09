@@ -38,11 +38,10 @@ adress_node* create_and_insert_before(adress_node* next, int pharmacyIndex) {
 
     if (next->prev == NULL) {
         next->prev = new_adress;
+        new_adress->next = next;
     } else {
         adress_node* tmp = next->prev;
-        if(tmp != NULL) {
-            tmp->next = new_adress;
-        }
+        tmp->next = new_adress;
         new_adress->prev = next->prev;
         next->prev = new_adress;
         new_adress->next = next;
@@ -53,13 +52,26 @@ adress_node* create_and_insert_before(adress_node* next, int pharmacyIndex) {
 
 
 void free_adresses(adress_node* adress) {
+    if(adress == NULL) {
+        fprintf(stderr, "Error, tried to free NULL pointer");
+        return;
+    }
+
     adress_node* tmp = adress;
-    if (tmp != NULL) {
+    if (tmp->prev != NULL) {
         tmp->prev->next = NULL;
     }
     while (tmp != NULL) {
         tmp = adress->next;
         free(adress);
         adress = tmp;
+    }
+}
+
+void print_adresses(adress_node *start_adress) {
+    while (start_adress != NULL)
+    {
+        printf("%d, ", start_adress->pharmacyIndex);
+        start_adress = start_adress->next;
     }
 }

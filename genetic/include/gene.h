@@ -13,5 +13,6 @@ typedef struct {
 Gene* create_genes(int nb_genes);
 void free_genes(Gene* genes, int nb_genes);
 int get_random_nb_genes(Matrix m);
+void print_genes(Gene *genes, int nb_genes);
 
 #endif 
