@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "individual.h"
+#include "../include/individual.h"
 
 Individual* create_individuals(int nb_individuals) {
     if (nb_individuals < 1) {

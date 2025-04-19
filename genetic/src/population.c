@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "population.h"
-#include "individual.h"
+#include "../include/population.h"
+#include "../include/individual.h"
 
 Population* create_population() {
     Population* population = (Population*) malloc(sizeof(Population));

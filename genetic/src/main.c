@@ -1,5 +1,5 @@
-#include "parser.h"
-#include "genetic.h"
+#include "../include/parser.h"
+#include "../include/genetic.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
         }
         printf("\n\n");
     }
+    free_population(population);
     free_matrix(m);
     return 0;
 }

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "gene.h"
+#include "../include/gene.h"
 
 Gene *create_genes(int nb_genes) {
     if(nb_genes < 1) {

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "genetic.h"
+#include "../include/genetic.h"
 
 int evolve_population(Matrix m, Population* population) {
     int last_father = (population->population_size * PERCENT_FATHER) / 100;
