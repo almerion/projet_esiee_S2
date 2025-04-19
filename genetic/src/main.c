@@ -7,13 +7,19 @@
 #define POPULATION_SIZE 32
 
 int main(int argc, char* argv[]) {
+    char* filePath = "../EntrainementPythonMaxime/matrice_distances86_2.csv";
+    /*
     if(argc < 2) {
         fprintf(stderr, "You have to specify the path to a csv as argument\n");
         return 1;
     }
+    */
+   if (argc == 2) {
+    filePath = argv[1];
+   }
     srand(time(NULL));
 
-    Matrix* m = parse_file(argv[1]);
+    Matrix* m = parse_file(filePath);
     if (m == NULL) {
         return 2;
     }
