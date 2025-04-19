@@ -1,5 +1,4 @@
-#include "parser.h"
-#include "matrix.h"
+#include "../include/parser.h"
 #include <stdio.h>
 #include "string.h"
 #include <stdlib.h>
