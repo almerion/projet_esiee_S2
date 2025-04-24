@@ -14,6 +14,7 @@
 
 // Définition de la structure pour représenter une adresse dans un chemin (liste chaînée)
 typedef struct _adress_node{
+    struct _adress_node* prev;
     int pharmacyIndex;      ///< L'index identifiant une pharmacie spécifique.
     struct _adress_node* next; ///< Pointeur vers le prochain nœud d'adresse dans la liste chaînée.
 }adress_node;
@@ -27,7 +28,11 @@ typedef adress_node* lst;    ///< Alias pour un pointeur vers le premier nœud d
  * @param pharmacyIndex L'index de la pharmacie à stocker dans le nouveau nœud.
  * @return Un pointeur vers le nouveau nœud d'adresse créé. Retourne NULL en cas d'échec d'allocation mémoire.
  */
-adress* create_adress(int pharmacyIndex);
+adress_node* create_adress(int pharmacyIndex);
+adress_node* create_and_insert_after(adress_node* prev, int pharmacyIndex);
+adress_node* create_and_insert_before(adress_node* next, int pharmacyIndex);
+void free_adresses(adress_node* adress);
+void print_adresses(adress_node *start_adress);
 
 /**
  * @brief Retire le dernier élément de la liste chaînée d'adresses et le retourne.
