@@ -184,3 +184,29 @@ void print_individuals(Individual* individuals, int nb_individuals) {
         printf("]\n");
     }
 }
+
+int save_in_csv(Individual* individual, char* file_name) {
+    int i;
+    FILE* file = fopen(file_name, "w");
+    
+    if (file == NULL) {
+        return 0;
+    }
+
+    for (i = 0; i < individual->nbGenes; i++) {
+        adress_node* current_adress = individual->gene[i].start_adress;
+        while (current_adress != NULL){
+            fprintf(file, "%d", current_adress->pharmacyIndex);
+            if (current_adress->next != NULL) {
+                fprintf(file, ",");
+            }
+            current_adress = current_adress->next;
+        }
+        if (i != individual->nbGenes -1) {
+            fprintf(file, "\n");
+        }
+    }
+
+    fclose(file);
+    return 1;
+}

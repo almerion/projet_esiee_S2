@@ -31,16 +31,25 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     int i;
-    for(i = 0; i < 50000000; i++) {
+    for(i = 0; i < 100000; i++) {
         printf("\033[2J\033[H");
         result = evolve_population(*m, population);
         if(!result) {
             free_population(population);
             free_matrix(m);
-            return 1;
+            return 3;
         }
+        printf("tour n° %d", i);
         printf("\n\n");
     }
+
+    if (!save_in_csv(population->individuals, "../paths.csv")) {
+        fprintf(stderr, "Couldn't save the file");
+        free_population(population);
+        free_matrix(m);
+        return 4;
+    }
+
     free_population(population);
     free_matrix(m);
     return 0;

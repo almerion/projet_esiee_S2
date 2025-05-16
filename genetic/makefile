@@ -1,5 +1,5 @@
 CC=gcc
-CFLAG = -Wall -ansi -std=c99 -Werror -Wextra
+CFLAG = -Wall -ansi -std=c99 -Werror -Wextra -g -Ofast
 SRC_DIR = src
 OBJ_DIR = bin
 SRC = $(wildcard $(SRC_DIR)/*.c)
