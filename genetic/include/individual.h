@@ -20,6 +20,7 @@ double evaluateFitness(Matrix matrix, Individual individual);
 void list_to_individual(int* list, Matrix m, Individual* individual);
 int* individual_to_list(Individual* ind, int size);
 void free_individuals(Individual* individuals, int nb_individuals);
+int save_in_csv(Individual* individual, char* file_name);
 void print_individuals(Individual* individuals, int nb_individuals);
 
 #endif
