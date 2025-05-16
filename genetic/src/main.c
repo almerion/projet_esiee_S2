@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     int i;
-    for(i = 0; i < 100000; i++) {
+    for(i = 0; i < 500000; i++) {
         printf("\033[2J\033[H");
         result = evolve_population(*m, population);
         if(!result) {

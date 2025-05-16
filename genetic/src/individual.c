@@ -61,9 +61,10 @@ int init_random_individual(Matrix m, Individual* individual, int nb_genes) {
 }
 
 double evaluateFitness(Matrix matrix, Individual individual){
-    Distime total = {0, 0};
+    double fitness = 0.0;
     int i;
     for(i = 0; i < individual.nbGenes; i++) {
+        Distime individualDistime = {0, 0};
         Gene current = individual.gene[i];
         adress_node *current_adress = current.start_adress;
         int from = 0;
@@ -74,20 +75,25 @@ double evaluateFitness(Matrix matrix, Individual individual){
             to = current_adress->pharmacyIndex;
 
             Distime current_cell = matrix.matrix[from][to];
-            total.dist += current_cell.dist;
-            total.time += current_cell.time;
+            individualDistime.dist += current_cell.dist;
+            individualDistime.time += current_cell.time;
             current_adress = current_adress->next;
         }
 
         from = to;
         to = 0;
         Distime current_cell = matrix.matrix[from][to];
-        total.dist += current_cell.dist;
-        total.time += current_cell.time;
-        total.time += SERVICE_TIME;
+        individualDistime.dist += current_cell.dist;
+        individualDistime.time += current_cell.time;
+        individualDistime.time += SERVICE_TIME;
+
+        fitness += individualDistime.dist;
+        if (individualDistime.time > LIMIT_TIME) {
+            fitness += 1000;
+        }
     }
 
-    return total.dist;
+    return fitness;
 }
 
 int cmp_individual(const void * a, const void * b){
